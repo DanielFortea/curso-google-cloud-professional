@@ -5,9 +5,9 @@ def run():
     # Configuración del pipeline
     options = PipelineOptions(
         runner="DataflowRunner",  # Cambiar a DirectRunner para local
-        project="gcp-data-engineer-curso-04",
+        project="curso-gcp-professional",
         region="us-central1",
-        temp_location="gs://gcs-bucket-curso-04b/temp"
+        temp_location="gs://gcs-bucket-curso-gcp-professional-engineer/temp"
     )
 
     with beam.Pipeline(options=options) as p:
@@ -16,7 +16,7 @@ def run():
             | "Leer archivo" >> beam.io.ReadFromText("gs://dataflow-samples/shakespeare/kinglear.txt")
             | "Separar palabras" >> beam.FlatMap(lambda line: line.split())
             | "Contar palabras" >> beam.combiners.Count.PerElement()
-            | "Guardar resultados" >> beam.io.WriteToText("gs://gcs-bucket-curso-04b/output/wordcount")
+            | "Guardar resultados" >> beam.io.WriteToText("gs://gcs-bucket-curso-gcp-professional-engineer/output/wordcount")
         )
     print("Pipeline ejecutado exitosamente.")
 
